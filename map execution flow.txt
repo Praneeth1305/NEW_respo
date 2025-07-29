@@ -1,0 +1,31 @@
+Map Execution Flow
+
+Pre-session rules
+	Root On-Begin
+	
+		Segment On-Begin    (Iteration 1)
+			Element1 - Simple Link --> Standard Rules --> Extended Rules
+			Element2 - Simple Link --> Standard Rules --> Extended Rules
+			..
+			..
+			Elementn - Simple Link --> Standard Rules --> Extended Rules
+		Segment On-End Rules
+		
+		
+		
+		Segment On-Begin    (Iteration 2)
+			Element1 - Simple Link --> Standard Rules --> Extended Rules
+			Element2 - Simple Link --> Standard Rules --> Extended Rules
+			..
+			..
+			Elementn - Simple Link --> Standard Rules --> Extended Rules
+		Segment On-End Rules  
+		
+	Root On-End
+	
+	
+	Same Process continues on the target side as well, Finally
+	
+Post-Session Rules will be executed
+
+

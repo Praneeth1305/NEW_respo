@@ -1,0 +1,104 @@
+write a playbook to install git on all server
+
+- name: Install Git on Debian/Ubuntu
+  hosts: all
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+=========================================================================================================
+write a playbook to create a file writing some content
+
+---
+- hosts: all
+  tasks:
+    - name: create file in all host nodes
+      file:
+        path: /home/ubuntu/hello.txt
+        state: touch
+    - name: copy the content
+      copy:
+        content: "hello ansible"
+        dest: /home/ubuntu/hello.txt
+...
+ 
+===========================================================================================================
+write a playbook to install apache2 (httpd) and copy index.html and start the server.
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: install httpd package
+      apt:
+        name: apache2
+        state: latest
+    - name: copy index.html file
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: start apache2 server
+      service:
+        name: apache2
+        state: started
+
+==================================================================================================================
+write a playbook by use variables to install apache2 (httpd) and copy index.html and start the server.
+
+---
+- hosts: all
+  become: true
+  vars:
+    package_name: apache2
+  tasks:
+    - name: update apt cache
+      apt:
+        update_cache: yes
+    - name: install apache2
+      apt:
+        name: "{{package_name}}"
+        state: latest
+    - name: copy index.html file
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: start apache2 server
+      service:
+        name: apache2
+        state: started
+======================================================================================================================
+Ansible vault
+=============
+
+ansible-vault create <file.name>.yml 
+
+ansible-vault encrypt <file.name>.yml 
+
+ansible-vault view <file.name>.yml
+
+ansible-vault edit <file.name>.yml
+
+ansible-vault decrypt <file.name>.yml
+
+ansible-vault rekey <file.name>.yml
+======================================================================================================================
+              
+while executing playbooks we need to pass vault playbook when its as already file was encrypt (vault)
+-- we need pass the command
+
+ansible-playbook <filename.yml> --ask-vault-pass
+
+
+
+
+
+
